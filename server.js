@@ -106,11 +106,10 @@ app.post('/api/chat', async (req, res) => {
 
   try {
     const response = await client.messages.create({
-      model: 'claude-opus-4-7',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 500,
       system: lang === 'en' ? SYSTEM_EN : SYSTEM_FR,
       messages,
-      thinking: { type: 'disabled' },
     });
 
     const text = response.content.find(b => b.type === 'text')?.text ?? '';
