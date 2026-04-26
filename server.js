@@ -116,12 +116,12 @@ app.post('/api/chat', async (req, res) => {
     const text = response.content.find(b => b.type === 'text')?.text ?? '';
     res.json({ reply: text });
   } catch (err) {
-    console.error('Claude API error:', err.message, err.status, err.error);
-    res.status(500).json({ debug: err.message, status: err.status });
+    console.error('Claude API error:', err.message);
+    res.status(500).json({ error: 'Service temporairement indisponible. Contactez-nous au +212 674 830 222.' });
   }
 });
 
-app.get('/health', (_, res) => res.json({ status: 'ok', keySet: !!process.env.ANTHROPIC_API_KEY, keyLen: (process.env.ANTHROPIC_API_KEY || '').length }));
+app.get('/health', (_, res) => res.json({ status: 'ok' }));
 
 if (require.main === module) {
   app.listen(port, () => console.log(`Core Spares chatbot API running on port ${port}`));
