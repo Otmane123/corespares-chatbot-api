@@ -116,8 +116,8 @@ app.post('/api/chat', async (req, res) => {
     const text = response.content.find(b => b.type === 'text')?.text ?? '';
     res.json({ reply: text });
   } catch (err) {
-    console.error('Claude API error:', err.message);
-    res.status(500).json({ error: 'Service temporairement indisponible. Contactez-nous au +212 674 830 222.' });
+    console.error('Claude API error:', err.message, err.status, err.error);
+    res.status(500).json({ debug: err.message, status: err.status });
   }
 });
 
