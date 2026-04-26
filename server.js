@@ -123,4 +123,8 @@ app.post('/api/chat', async (req, res) => {
 
 app.get('/health', (_, res) => res.json({ status: 'ok' }));
 
-app.listen(port, () => console.log(`Core Spares chatbot API running on port ${port}`));
+if (require.main === module) {
+  app.listen(port, () => console.log(`Core Spares chatbot API running on port ${port}`));
+}
+
+module.exports = app;
