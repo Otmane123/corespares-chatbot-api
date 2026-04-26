@@ -1,12 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const Anthropic = require('@anthropic-ai/sdk');
-require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3001;
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 // Allow requests from corespares.ma and localhost for dev
 const allowedOrigins = [
@@ -105,6 +102,7 @@ app.post('/api/chat', async (req, res) => {
   ];
 
   try {
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const response = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 500,
