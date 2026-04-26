@@ -121,7 +121,7 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-app.get('/health', (_, res) => res.json({ status: 'ok' }));
+app.get('/health', (_, res) => res.json({ status: 'ok', keySet: !!process.env.ANTHROPIC_API_KEY, keyLen: (process.env.ANTHROPIC_API_KEY || '').length }));
 
 if (require.main === module) {
   app.listen(port, () => console.log(`Core Spares chatbot API running on port ${port}`));
